@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ana Carolina Luján — Data Scientist & AI Developer</title>
+  <meta name="description" content="Portfolio de Ana Carolina Luján. Data Scientist especializada en Machine Learning, NLP y Computer Vision. Buenos Aires, Argentina." />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Flowbite via CDN (componentes interactivos: navbar mobile, etc.) -->
+  <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
+
+  <!-- Fuentes: Inter para cuerpo, Fraunces como serif con personalidad para títulos -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Fraunces', 'Georgia', 'serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ── Colores base — cambiá estos valores para cambiar la paleta completa ── */
+    :root {
+      --bg:           #f7f4ed;   /* fondo crema cálido */
+      --bg-card:      #ffffff;
+      --ink:          #1c1917;   /* texto principal */
+      --ink-light:    #6b7280;   /* texto secundario */
+      --border:       #e5e2d9;
+      --violet:       #8b82c4;   /* acento principal */
+      --violet-pale:  #e8e6f4;   /* fondo suave para badges */
+    }
+    body.dark {
+      --bg:         #111110;
+      --bg-card:    #1a1a18;
+      --ink:        #f0ede6;
+      --ink-light:  #9ca3af;
+      --border:     rgba(255,255,255,0.08);
+      --violet-pale: rgba(139,130,196,0.15);
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      transition: background 0.3s, color 0.3s;
+    }
+    .font-display { font-family: 'Fraunces', Georgia, serif; }
+
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Animación de aparición al scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-group > *:nth-child(1) { transition-delay: 0s; }
+    .reveal-group > *:nth-child(2) { transition-delay: 0.08s; }
+    .reveal-group > *:nth-child(3) { transition-delay: 0.16s; }
+    .reveal-group > *:nth-child(4) { transition-delay: 0.24s; }
+    .reveal-group > *:nth-child(5) { transition-delay: 0.32s; }
+    .reveal-group > *:nth-child(6) { transition-delay: 0.40s; }
+
+    /* Nav links con subrayado animado */
+    .nav-link {
+      position: relative;
+      color: var(--ink-light);
+      font-size: 0.875rem;
+      font-weight: 400;
+      transition: color 0.2s;
+      text-decoration: none;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 1px;
+      background: var(--violet);
+      transition: width 0.25s ease;
+    }
+    .nav-link:hover { color: var(--ink); }
+    .nav-link:hover::after { width: 100%; }
+
+    /* Etiqueta de sección */
+    .section-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--violet);
+      margin-bottom: 0.75rem;
+    }
+
+    /* Pills de habilidades */
+    .skill-pill {
+      display: inline-block;
+      font-size: 0.78rem;
+      padding: 0.28rem 0.8rem;
+      border-radius: 9999px;
+      border: 1px solid var(--border);
+      color: var(--ink-light);
+      background: transparent;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .skill-pill:hover {
+      border-color: var(--violet);
+      color: var(--violet);
+      background: var(--violet-pale);
+    }
+
+    /* Proyecto: borde izquierdo como único acento visual */
+    .project-card {
+      border-left: 2px solid var(--border);
+      padding-left: 1.5rem;
+      transition: border-color 0.25s;
+    }
+    .project-card:hover { border-color: var(--violet); }
+
+    /* Card de educación */
+    .edu-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.4rem;
+      background: var(--bg-card);
+      transition: box-shadow 0.2s;
+    }
+    .edu-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+
+    /* Botones */
+    .btn-primary {
+      display: inline-block;
+      background: var(--ink);
+      color: var(--bg);
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 0.6rem 1.4rem;
+      border-radius: 6px;
+      transition: opacity 0.2s;
+      text-decoration: none;
+    }
+    .btn-primary:hover { opacity: 0.8; }
+    .btn-secondary {
+      display: inline-block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 0.6rem 1.4rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      color: var(--ink);
+      transition: border-color 0.2s, color 0.2s;
+      text-decoration: none;
+    }
+    .btn-secondary:hover { border-color: var(--violet); color: var(--violet); }
+
+    /* Lista de certificaciones */
+    .cert-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .cert-item:last-child { border-bottom: none; }
+
+    /* Inputs del formulario */
+    .form-input {
+      width: 100%;
+      font-size: 0.875rem;
+      padding: 0.6rem 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--bg-card);
+      color: var(--ink);
+      outline: none;
+      font-family: 'Inter', sans-serif;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus { border-color: var(--violet); }
+    .form-label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--ink-light);
+      margin-bottom: 0.35rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       NAVBAR
+       Para cambiar los links del menú: editá los <a class="nav-link">
+       ============================================================ -->
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+    style="background: rgba(247,244,237,0.92); backdrop-filter: blur(14px); border-bottom: 1px solid transparent;">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+
+      <a href="#inicio" class="font-display font-light text-base tracking-tight" style="color: var(--ink);">
+        Ana Carolina Luján
+      </a>
+
+      <!-- Links desktop -->
+      <nav class="hidden md:flex items-center gap-7">
+        <a href="#sobre-mi"        class="nav-link">Sobre mí</a>
+        <a href="#formacion"       class="nav-link">Formación</a>
+        <a href="#proyectos"       class="nav-link">Proyectos</a>
+        <a href="#skills"          class="nav-link">Skills</a>
+        <a href="#certificaciones" class="nav-link">Certs</a>
+        <a href="#contacto"        class="nav-link">Contacto</a>
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <button id="darkToggle" class="w-8 h-8 flex items-center justify-center rounded text-base transition-colors"
+          style="color: var(--ink-light);" aria-label="Cambiar tema">🌙</button>
+
+        <!-- Botón hamburguesa para mobile — Flowbite maneja el toggle -->
+        <button data-collapse-toggle="mobile-menu" type="button"
+          class="md:hidden p-1.5 rounded" style="color: var(--ink-light);"
+          aria-expanded="false" aria-controls="mobile-menu">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Menú mobile -->
+    <div id="mobile-menu" class="hidden md:hidden px-6 pb-5 flex flex-col gap-4"
+      style="border-top: 1px solid var(--border);">
+      <a href="#sobre-mi"        class="nav-link pt-4">Sobre mí</a>
+      <a href="#formacion"       class="nav-link">Formación</a>
+      <a href="#proyectos"       class="nav-link">Proyectos</a>
+      <a href="#skills"          class="nav-link">Skills</a>
+      <a href="#certificaciones" class="nav-link">Certs</a>
+      <a href="#contacto"        class="nav-link">Contacto</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============================================================
+         HERO
+         Cambiá: nombre, título, descripción y links sociales
+         ============================================================ -->
+    <section id="inicio" class="min-h-screen flex items-center pt-20 pb-16">
+      <div class="max-w-5xl mx-auto px-6 w-full">
+        <div class="max-w-2xl">
+
+          <p class="text-sm mb-8" style="color: var(--ink-light);">Buenos Aires, Argentina · 2025</p>
+
+          <!-- Nombre — cambiá el texto aquí -->
+          <h1 class="font-display font-light leading-none mb-5"
+            style="font-size: clamp(3.2rem, 8vw, 5.8rem); letter-spacing: -0.02em;">
+            Ana Carolina<br>
+            <em style="color: var(--violet);">Luján</em>
+          </h1>
+
+          <!-- Título profesional — cambiá si querés -->
+          <p class="text-lg font-light mb-5" style="color: var(--ink-light);">
+            Data Scientist &amp; AI Developer
+          </p>
+
+          <!-- Descripción — editá este texto con tus palabras -->
+          <p class="text-sm leading-relaxed mb-10 max-w-md" style="color: var(--ink-light);">
+            Construyo soluciones de inteligencia artificial con foco en NLP, Computer Vision
+            y Machine Learning. Combino formación técnica con una mirada humana que viene de
+            años estudiando Psicopedagogía.
+          </p>
+
+          <div class="flex flex-wrap gap-3 mb-12">
+            <a href="#proyectos" class="btn-primary">Ver proyectos</a>
+            <a href="#contacto"  class="btn-secondary">Contactarme</a>
+          </div>
+
+          <!-- Links sociales — cambiá los href -->
+          <div class="flex flex-wrap items-center gap-6">
+            <a href="https://www.linkedin.com/in/anacarolinalujan/" target="_blank" rel="noopener"
+               class="flex items-center gap-1.5 text-sm transition-colors hover:underline"
+               style="color: var(--ink-light);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7H10v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/>
+                <circle cx="4" cy="4" r="2"/>
+              </svg>
+              LinkedIn
+            </a>
+            <a href="https://github.com/Ana-Lujan" target="_blank" rel="noopener"
+               class="flex items-center gap-1.5 text-sm hover:underline" style="color: var(--ink-light);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+              </svg>
+              GitHub
+            </a>
+            <a href="https://huggingface.co/Ana-Lujan" target="_blank" rel="noopener"
+               class="text-sm hover:underline" style="color: var(--ink-light);">
+              🤗 Hugging Face
+            </a>
+            <a href="mailto:annacarolinalujan@gmail.com"
+               class="text-sm hover:underline" style="color: var(--ink-light);">
+              annacarolinalujan@gmail.com
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider max-w-5xl mx-auto" />
+
+    <!-- ============================================================
+         SOBRE MÍ
+         Cambiá los números de stats y los párrafos de texto
+         ============================================================ -->
+    <section id="sobre-mi" class="py-24">
+      <div class="max-w-5xl mx-auto px-6">
+        <div class="grid md:grid-cols-12 gap-12 items-start">
+
+          <div class="md:col-span-4 reveal">
+            <span class="section-tag">Sobre mí</span>
+            <div class="mt-8 flex flex-col gap-7">
+              <!-- Cambiá estos números -->
+              <div>
+                <p class="font-display font-light text-4xl" style="color: var(--violet);">2+</p>
+                <p class="text-xs mt-1" style="color: var(--ink-light);">años trabajando con IA y datos</p>
+              </div>
+              <div>
+                <p class="font-display font-light text-4xl" style="color: var(--violet);">3</p>
+                <p class="text-xs mt-1" style="color: var(--ink-light);">años de formación en Psicopedagogía</p>
+              </div>
+              <div>
+                <p class="font-display font-light text-4xl" style="color: var(--violet);">5+</p>
+                <p class="text-xs mt-1" style="color: var(--ink-light);">proyectos de ML en producción</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="md:col-span-8 reveal" style="transition-delay:0.1s;">
+            <h2 class="font-display font-light text-3xl mb-6" style="letter-spacing:-0.01em;">
+              Tecnología y humanidad,<br>
+              <em style="color: var(--violet);">juntas.</em>
+            </h2>
+            <!-- Cambiá estos párrafos con tus palabras -->
+            <div class="flex flex-col gap-4 text-sm leading-relaxed" style="color: var(--ink-light);">
+              <p>
+                Soy egresada de la <strong style="color:var(--ink); font-weight:500;">Tecnicatura en Ciencia de Datos e Inteligencia Artificial del IFTS 24</strong>
+                y actualmente estudio la <strong style="color:var(--ink); font-weight:500;">Licenciatura en Tecnologías Digitales en la Universidad de la Ciudad de Buenos Aires</strong>.
+              </p>
+              <p>
+                Antes de llegar al mundo tech, pasé tres años estudiando Psicopedagogía. Esa formación me enseñó algo que ningún curso de machine learning enseña: cómo piensan las personas, cómo procesan información, cómo se comunican las ideas. Hoy eso define cómo diseño soluciones de IA.
+              </p>
+              <p>
+                Me interesa el espacio donde la técnica y lo humano se cruzan. Modelos que no solo funcionan bien en métricas, sino que tienen sentido para quien los usa.
+              </p>
+              <p>
+                Trabajo principalmente con <strong style="color:var(--ink); font-weight:500;">Python, NLP, Computer Vision y Machine Learning</strong>.
+                Despliego mis proyectos en Hugging Face Spaces y GitHub.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider max-w-5xl mx-auto" />
+
+    <!-- ============================================================
+         FORMACIÓN
+         Para agregar una institución: copiá un bloque .edu-card
+         ============================================================ -->
+    <section id="formacion" class="py-24">
+      <div class="max-w-5xl mx-auto px-6">
+
+        <div class="mb-12 reveal">
+          <span class="section-tag">Formación</span>
+          <h2 class="font-display font-light text-3xl" style="letter-spacing:-0.01em;">Camino académico</h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4 reveal-group">
+
+          <div class="edu-card reveal">
+            <p class="text-xs font-medium mb-3 px-2 py-0.5 rounded inline-block"
+               style="background:var(--violet-pale); color:var(--violet);">En curso · 2024–</p>
+            <h3 class="font-medium text-sm mb-1">Lic. en Tecnologías Digitales</h3>
+            <p class="text-xs mb-3" style="color:var(--violet);">Universidad de la Ciudad de Buenos Aires</p>
+            <p class="text-xs leading-relaxed mb-4" style="color:var(--ink-light);">
+              Programa que integra desarrollo tecnológico, gestión digital y programación avanzada.
+            </p>
+            <a href="https://www.udelaciudad.edu.ar/licenciatura-en-tecnologias-digitales/"
+               target="_blank" rel="noopener" class="text-xs font-medium" style="color:var(--violet);">
+              Ver carrera →
+            </a>
+          </div>
+
+          <div class="edu-card reveal">
+            <p class="text-xs font-medium mb-3 px-2 py-0.5 rounded inline-block"
+               style="background:var(--violet-pale); color:var(--violet);">Egresada · 2022–2024</p>
+            <h3 class="font-medium text-sm mb-1">Tecnicatura en Ciencia de Datos e IA</h3>
+            <p class="text-xs mb-3" style="color:var(--violet);">IFTS 24</p>
+            <p class="text-xs leading-relaxed mb-4" style="color:var(--ink-light);">
+              ML, Deep Learning, NLP, Computer Vision. Proyecto final: Sentiment Insights App.
+            </p>
+            <a href="https://www.ifts24.edu.ar/carreras"
+               target="_blank" rel="noopener" class="text-xs font-medium" style="color:var(--violet);">
+              Ver institución →
+            </a>
+          </div>
+
+          <div class="edu-card reveal">
+            <p class="text-xs font-medium mb-3 px-2 py-0.5 rounded inline-block"
+               style="background:#fef3c7; color:#92400e;">3 años cursados</p>
+            <h3 class="font-medium text-sm mb-1">Psicopedagogía</h3>
+            <p class="text-xs mb-3" style="color:var(--violet);">IES N°1 — CABA</p>
+            <p class="text-xs leading-relaxed mb-4" style="color:var(--ink-light);">
+              Aprendizaje humano, desarrollo cognitivo, comunicación y análisis del comportamiento.
+            </p>
+            <a href="https://ies1-caba.infd.edu.ar/sitio/carrera-de-psicopedagogia/"
+               target="_blank" rel="noopener" class="text-xs font-medium" style="color:var(--violet);">
+              Ver carrera →
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider max-w-5xl mx-auto" />
+
+    <!-- ============================================================
+         PROYECTOS
+         Para agregar uno: copiá un bloque .project-card completo
+         ============================================================ -->
+    <section id="proyectos" class="py-24">
+      <div class="max-w-5xl mx-auto px-6">
+
+        <div class="mb-12 reveal">
+          <span class="section-tag">Proyectos</span>
+          <h2 class="font-display font-light text-3xl" style="letter-spacing:-0.01em;">Trabajo con IA</h2>
+        </div>
+
+        <div class="flex flex-col gap-12">
+
+          <!-- Proyecto 1: Sentiment Insights App -->
+          <div class="project-card reveal">
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+              <div class="flex items-center gap-3">
+                <span class="text-xs font-medium" style="color:var(--violet);">NLP · Proyecto final</span>
+                <span class="text-xs" style="color:var(--ink-light);">2024</span>
+              </div>
+              <div class="flex gap-4">
+                <a href="https://github.com/Ana-Lujan/-Sentiment-Insights-app" target="_blank" rel="noopener"
+                   class="text-xs hover:underline" style="color:var(--ink-light);">GitHub →</a>
+                <a href="https://www.youtube.com/watch?v=2n-QbKeq3Dw" target="_blank" rel="noopener"
+                   class="text-xs font-medium hover:underline" style="color:var(--violet);">▶ Ver demo</a>
+              </div>
+            </div>
+            <h3 class="font-display font-light text-xl mb-2">Sentiment Insights App</h3>
+            <p class="text-sm leading-relaxed mb-4" style="color:var(--ink-light);">
+              Aplicación que analiza el tono emocional de textos en tiempo real. Usando Transformers (BERT)
+              clasifica sentimientos en positivo, negativo y neutro. Pensado para análisis de reseñas,
+              feedback de clientes y monitoreo de redes sociales.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-pill">Python</span>
+              <span class="skill-pill">BERT</span>
+              <span class="skill-pill">Transformers</span>
+              <span class="skill-pill">Gradio</span>
+              <span class="skill-pill">Hugging Face</span>
+            </div>
+          </div>
+
+          <!-- Proyecto 2: Restauración de imágenes -->
+          <div class="project-card reveal">
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+              <div class="flex items-center gap-3">
+                <span class="text-xs font-medium" style="color:var(--violet);">Computer Vision</span>
+                <span class="text-xs" style="color:var(--ink-light);">2024</span>
+              </div>
+              <a href="https://huggingface.co/spaces/Ana-Lujan/Restauracion-enchancement"
+                 target="_blank" rel="noopener"
+                 class="text-xs font-medium hover:underline" style="color:var(--violet);">Demo en vivo 🤗 →</a>
+            </div>
+            <h3 class="font-display font-light text-xl mb-2">Restauración & Enhancement de Imágenes</h3>
+            <p class="text-sm leading-relaxed mb-4" style="color:var(--ink-light);">
+              Sistema que usa modelos de Deep Learning para restaurar imágenes dañadas, borrosas o degradadas.
+              Aplica super-resolución y denoising para recuperar detalles visuales perdidos. Útil en
+              patrimonio cultural, medicina e imágenes históricas.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-pill">PyTorch</span>
+              <span class="skill-pill">Super-resolución</span>
+              <span class="skill-pill">OpenCV</span>
+              <span class="skill-pill">Gradio</span>
+              <span class="skill-pill">HF Spaces</span>
+            </div>
+          </div>
+
+          <!-- Proyecto 3: Clasificador de residuos -->
+          <div class="project-card reveal">
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+              <div class="flex items-center gap-3">
+                <span class="text-xs font-medium" style="color:var(--violet);">Computer Vision · IA sostenible</span>
+                <span class="text-xs" style="color:var(--ink-light);">2024</span>
+              </div>
+              <a href="https://huggingface.co/spaces/Ana-Lujan/Clasificador_Residuos"
+                 target="_blank" rel="noopener"
+                 class="text-xs font-medium hover:underline" style="color:var(--violet);">Demo en vivo 🤗 →</a>
+            </div>
+            <h3 class="font-display font-light text-xl mb-2">Clasificador de Residuos con IA</h3>
+            <p class="text-sm leading-relaxed mb-4" style="color:var(--ink-light);">
+              Modelo de visión por computadora que identifica si un residuo es reciclable a partir de una foto.
+              Entrenado con Transfer Learning (EfficientNet). Busca facilitar el reciclaje correcto a
+              nivel urbano.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-pill">CNN</span>
+              <span class="skill-pill">Transfer Learning</span>
+              <span class="skill-pill">EfficientNet</span>
+              <span class="skill-pill">Python</span>
+              <span class="skill-pill">Gradio</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider max-w-5xl mx-auto" />
+
+    <!-- ============================================================
+         SKILLS
+         Para editar: agregá o quitá <span class="skill-pill"> en cada grupo
+         ============================================================ -->
+    <section id="skills" class="py-24">
+      <div class="max-w-5xl mx-auto px-6">
+
+        <div class="mb-12 reveal">
+          <span class="section-tag">Stack</span>
+          <h2 class="font-display font-light text-3xl" style="letter-spacing:-0.01em;">Herramientas & skills</h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-x-16 gap-y-10 reveal-group">
+          <div class="reveal">
+            <p class="text-xs font-medium uppercase tracking-widest mb-4" style="color:var(--ink-light);">Lenguajes & entornos</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-pill">Python</span>
+              <span class="skill-pill">SQL</span>
+              <span class="skill-pill">R</span>
+              <span class="skill-pill">Jupyter</span>
+              <span class="skill-pill">Google Colab</span>
+            </div>
+          </div>
+          <div class="reveal">
+            <p class="text-xs font-medium uppercase tracking-widest mb-4" style="color:var(--ink-light);">Machine Learning & Deep Learning</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-pill">Scikit-learn</span>
+              <span class="skill-pill">TensorFlow</span>
+              <span class="skill-pill">Keras</span>
+              <span class="skill-pill">PyTorch</span>
+              <span class="skill-pill">XGBoost</span>
+            </div>
+          </div>
+          <div class="reveal">
+            <p class="text-xs font-medium uppercase tracking-widest mb-4" style="color:var(--ink-light);">NLP & Modelos de lenguaje</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-pill">Hugging Face</span>
+              <span class="skill-pill">Transformers</span>
+              <span class="skill-pill">BERT</span>
+              <span class="skill-pill">NLTK</span>
+              <span class="skill-pill">spaCy</span>
+            </div>
+          </div>
+          <div class="reveal">
+            <p class="text-xs font-medium uppercase tracking-widest mb-4" style="color:var(--ink-light);">Datos & Visualización</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-pill">Pandas</span>
+              <span class="skill-pill">NumPy</span>
+              <span class="skill-pill">Matplotlib</span>
+              <span class="skill-pill">Seaborn</span>
+              <span class="skill-pill">Power BI</span>
+            </div>
+          </div>
+          <div class="reveal">
+            <p class="text-xs font-medium uppercase tracking-widest mb-4" style="color:var(--ink-light);">Deploy & Herramientas</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-pill">Gradio</span>
+              <span class="skill-pill">Streamlit</span>
+              <span class="skill-pill">HF Spaces</span>
+              <span class="skill-pill">Git & GitHub</span>
+            </div>
+          </div>
+          <div class="reveal">
+            <p class="text-xs font-medium uppercase tracking-widest mb-4" style="color:var(--ink-light);">Soft skills</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-pill">Comunicación</span>
+              <span class="skill-pill">Análisis cognitivo</span>
+              <span class="skill-pill">Trabajo en equipo</span>
+              <span class="skill-pill">Pensamiento crítico</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider max-w-5xl mx-auto" />
+
+    <!-- ============================================================
+         CERTIFICACIONES
+         Para agregar: copiá un bloque .cert-item
+         ============================================================ -->
+    <section id="certificaciones" class="py-24">
+      <div class="max-w-5xl mx-auto px-6">
+
+        <div class="mb-12 reveal">
+          <span class="section-tag">Formación continua</span>
+          <h2 class="font-display font-light text-3xl" style="letter-spacing:-0.01em;">Certificaciones</h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-x-16 reveal">
+          <div>
+            <div class="cert-item">
+              <div class="flex-1">
+                <p class="text-sm font-medium">Python for Data Science, AI &amp; Development</p>
+                <p class="text-xs mt-0.5" style="color:var(--violet);">IBM / Coursera · 2023</p>
+              </div>
+              <a href="https://www.linkedin.com/in/anacarolinalujan/" target="_blank" rel="noopener"
+                 class="text-xs shrink-0 hover:underline" style="color:var(--ink-light);">Ver →</a>
+            </div>
+            <div class="cert-item">
+              <div class="flex-1">
+                <p class="text-sm font-medium">Machine Learning with Python</p>
+                <p class="text-xs mt-0.5" style="color:var(--violet);">IBM / Coursera · 2023</p>
+              </div>
+              <a href="https://www.linkedin.com/in/anacarolinalujan/" target="_blank" rel="noopener"
+                 class="text-xs shrink-0 hover:underline" style="color:var(--ink-light);">Ver →</a>
+            </div>
+            <div class="cert-item">
+              <div class="flex-1">
+                <p class="text-sm font-medium">NLP with Transformers</p>
+                <p class="text-xs mt-0.5" style="color:var(--violet);">Hugging Face · 2024</p>
+              </div>
+              <a href="https://www.linkedin.com/in/anacarolinalujan/" target="_blank" rel="noopener"
+                 class="text-xs shrink-0 hover:underline" style="color:var(--ink-light);">Ver →</a>
+            </div>
+            <div class="cert-item">
+              <div class="flex-1">
+                <p class="text-sm font-medium">Data Analysis with Python</p>
+                <p class="text-xs mt-0.5" style="color:var(--violet);">freeCodeCamp · 2023</p>
+              </div>
+              <a href="https://www.linkedin.com/in/anacarolinalujan/" target="_blank" rel="noopener"
+                 class="text-xs shrink-0 hover:underline" style="color:var(--ink-light);">Ver →</a>
+            </div>
+          </div>
+          <div>
+            <div class="cert-item">
+              <div class="flex-1">
+                <p class="text-sm font-medium">Computer Vision with PyTorch</p>
+                <p class="text-xs mt-0.5" style="color:var(--violet);">Udemy · 2024</p>
+              </div>
+              <a href="https://www.linkedin.com/in/anacarolinalujan/" target="_blank" rel="noopener"
+                 class="text-xs shrink-0 hover:underline" style="color:var(--ink-light);">Ver →</a>
+            </div>
+            <div class="cert-item">
+              <div class="flex-1">
+                <p class="text-sm font-medium">Deploy ML Models with Gradio</p>
+                <p class="text-xs mt-0.5" style="color:var(--violet);">DeepLearning.AI · 2024</p>
+              </div>
+              <a href="https://www.linkedin.com/in/anacarolinalujan/" target="_blank" rel="noopener"
+                 class="text-xs shrink-0 hover:underline" style="color:var(--ink-light);">Ver →</a>
+            </div>
+            <div class="cert-item">
+              <div class="flex-1">
+                <p class="text-sm font-medium">Deep Learning Specialization</p>
+                <p class="text-xs mt-0.5" style="color:var(--violet);">DeepLearning.AI · 2024</p>
+              </div>
+              <a href="https://www.linkedin.com/in/anacarolinalujan/" target="_blank" rel="noopener"
+                 class="text-xs shrink-0 hover:underline" style="color:var(--ink-light);">Ver →</a>
+            </div>
+            <div class="cert-item">
+              <div class="flex-1">
+                <p class="text-sm font-medium">SQL for Data Science</p>
+                <p class="text-xs mt-0.5" style="color:var(--violet);">UC Davis / Coursera · 2023</p>
+              </div>
+              <a href="https://www.linkedin.com/in/anacarolinalujan/" target="_blank" rel="noopener"
+                 class="text-xs shrink-0 hover:underline" style="color:var(--ink-light);">Ver →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 reveal">
+          <a href="https://www.linkedin.com/in/anacarolinalujan/" target="_blank" rel="noopener"
+             class="text-sm font-medium hover:underline" style="color:var(--violet);">
+            Ver todas en LinkedIn →
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <hr class="divider max-w-5xl mx-auto" />
+
+    <!-- ============================================================
+         CONTACTO
+         Formulario conectado a Formspree (ID: xlgzybjz)
+         Los mensajes llegan a annacarolinalujan@gmail.com
+         ============================================================ -->
+    <section id="contacto" class="py-24">
+      <div class="max-w-5xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-16 items-start">
+
+          <div class="reveal">
+            <span class="section-tag">Contacto</span>
+            <h2 class="font-display font-light text-3xl mt-1 mb-6" style="letter-spacing:-0.01em;">
+              ¿Trabajamos<br><em style="color:var(--violet);">juntas/os?</em>
+            </h2>
+            <p class="text-sm leading-relaxed mb-8" style="color:var(--ink-light);">
+              Estoy abierta a oportunidades laborales, proyectos de IA y colaboraciones.
+              Escribime y vemos qué podemos construir.
+            </p>
+            <div class="flex flex-col gap-4">
+              <a href="mailto:annacarolinalujan@gmail.com"
+                 class="flex items-center gap-3 text-sm group" style="color:var(--ink-light);">
+                <span class="w-8 h-8 rounded flex items-center justify-center text-xs shrink-0 font-medium"
+                      style="background:var(--violet-pale); color:var(--violet);">@</span>
+                <span class="group-hover:underline">annacarolinalujan@gmail.com</span>
+              </a>
+              <a href="https://www.linkedin.com/in/anacarolinalujan/" target="_blank" rel="noopener"
+                 class="flex items-center gap-3 text-sm group" style="color:var(--ink-light);">
+                <span class="w-8 h-8 rounded flex items-center justify-center text-xs shrink-0 font-medium"
+                      style="background:var(--violet-pale); color:var(--violet);">in</span>
+                <span class="group-hover:underline">linkedin.com/in/anacarolinalujan</span>
+              </a>
+              <a href="https://github.com/Ana-Lujan" target="_blank" rel="noopener"
+                 class="flex items-center gap-3 text-sm group" style="color:var(--ink-light);">
+                <span class="w-8 h-8 rounded flex items-center justify-center text-xs shrink-0 font-medium"
+                      style="background:var(--violet-pale); color:var(--violet);">gh</span>
+                <span class="group-hover:underline">github.com/Ana-Lujan</span>
+              </a>
+              <a href="https://huggingface.co/Ana-Lujan" target="_blank" rel="noopener"
+                 class="flex items-center gap-3 text-sm group" style="color:var(--ink-light);">
+                <span class="w-8 h-8 rounded flex items-center justify-center shrink-0"
+                      style="background:var(--violet-pale);">🤗</span>
+                <span class="group-hover:underline">huggingface.co/Ana-Lujan</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="reveal" style="transition-delay:0.1s;">
+            <form id="contact-form" action="https://formspree.io/f/xlgzybjz" method="POST"
+                  class="flex flex-col gap-4">
+              <input type="hidden" name="_subject" value="Nuevo mensaje desde tu portfolio" />
+              <input type="text" name="_gotcha" style="display:none" />
+              <div>
+                <label class="form-label">Nombre</label>
+                <input type="text" name="nombre" class="form-input" placeholder="Tu nombre" required />
+              </div>
+              <div>
+                <label class="form-label">Email</label>
+                <input type="email" name="email" class="form-input" placeholder="tu@email.com" required />
+              </div>
+              <div>
+                <label class="form-label">Mensaje</label>
+                <textarea name="mensaje" class="form-input" rows="4"
+                  placeholder="Contame de tu proyecto o propuesta..." required style="resize:vertical;"></textarea>
+              </div>
+              <button type="submit" id="form-btn" class="btn-primary text-center mt-1">
+                Enviar mensaje
+              </button>
+              <p id="form-status" class="text-sm hidden"></p>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="py-12" style="border-top: 1px solid var(--border);">
+    <div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+      <div>
+        <p class="font-display font-light text-lg mb-1">Ana Carolina Luján</p>
+        <p class="text-xs mb-1" style="color:var(--ink-light);">Data Scientist & AI Developer · Buenos Aires</p>
+        <a href="mailto:annacarolinalujan@gmail.com"
+           class="text-xs hover:underline" style="color:var(--violet);">annacarolinalujan@gmail.com</a>
+      </div>
+      <div class="flex flex-col gap-1 text-xs" style="color:var(--ink-light);">
+        <a href="https://www.linkedin.com/in/anacarolinalujan/" target="_blank" rel="noopener" class="hover:underline">LinkedIn</a>
+        <a href="https://github.com/Ana-Lujan" target="_blank" rel="noopener" class="hover:underline">GitHub</a>
+        <a href="https://huggingface.co/Ana-Lujan" target="_blank" rel="noopener" class="hover:underline">Hugging Face</a>
+      </div>
+      <div class="flex flex-col gap-1 text-xs" style="color:var(--ink-light);">
+        <a href="https://huggingface.co/spaces/Ana-Lujan/Restauracion-enchancement" target="_blank" rel="noopener" class="hover:underline">Restauración de Imágenes</a>
+        <a href="https://huggingface.co/spaces/Ana-Lujan/Clasificador_Residuos" target="_blank" rel="noopener" class="hover:underline">Clasificador de Residuos</a>
+        <a href="https://github.com/Ana-Lujan/-Sentiment-Insights-app" target="_blank" rel="noopener" class="hover:underline">Sentiment Insights App</a>
+      </div>
+      <p class="text-xs self-end md:self-auto" style="color:var(--ink-light);">© 2025</p>
+    </div>
+  </footer>
+
+  <!-- Flowbite JS — necesario para el menú mobile -->
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+
+  <script>
+    // ── DARK MODE ──────────────────────────────────────────────
+    const toggle  = document.getElementById('darkToggle');
+    const navbar  = document.getElementById('navbar');
+    const body    = document.body;
+
+    function setTheme(dark) {
+      body.classList.toggle('dark', dark);
+      toggle.textContent = dark ? '☀️' : '🌙';
+      navbar.style.background = dark
+        ? 'rgba(17,17,16,0.92)'
+        : 'rgba(247,244,237,0.92)';
+      localStorage.setItem('theme', dark ? 'dark' : 'light');
+    }
+
+    // Carga preferencia guardada al entrar
+    setTheme(localStorage.getItem('theme') === 'dark');
+
+    toggle.addEventListener('click', () => setTheme(!body.classList.contains('dark')));
+
+    // ── NAVBAR: borde al hacer scroll ────────────────────────
+    window.addEventListener('scroll', () => {
+      navbar.style.borderBottomColor = window.scrollY > 10
+        ? 'var(--border)'
+        : 'transparent';
+    });
+
+    // ── REVEAL AL SCROLL ─────────────────────────────────────
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ── FORMULARIO FORMSPREE (sin redirección) ────────────────
+    const form       = document.getElementById('contact-form');
+    const formBtn    = document.getElementById('form-btn');
+    const formStatus = document.getElementById('form-status');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      formBtn.textContent = 'Enviando...';
+      formBtn.disabled = true;
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          formStatus.textContent = '✓ Mensaje enviado. Te respondo pronto.';
+          formStatus.style.color = 'var(--violet)';
+          form.reset();
+        } else {
+          throw new Error();
+        }
+      } catch {
+        formStatus.textContent = 'Algo salió mal. Escribime a annacarolinalujan@gmail.com';
+        formStatus.style.color = '#ef4444';
+      } finally {
+        formStatus.classList.remove('hidden');
+        formBtn.textContent = 'Enviar mensaje';
+        formBtn.disabled = false;
+      }
+    });
+
+    // ── SMOOTH SCROLL ────────────────────────────────────────
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) window.scrollTo({
+          top: target.offsetTop - navbar.offsetHeight - 16,
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
